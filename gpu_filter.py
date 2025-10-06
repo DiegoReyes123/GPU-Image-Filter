@@ -14,13 +14,13 @@ kernel = np.array([[1,1,1],
                    [1,1,1],
                    [1,1,1]], dtype=np.float32) / 9.0
 
-# ---------- CPU ----------
+# CPU
 start = time.time()
 out_cpu = cv2.filter2D(img, -1, kernel)
 cpu_time = time.time() - start
 print(f"CPU Time: {cpu_time*1000:.2f} ms")
 
-# ---------- GPU ----------
+# GPU
 img_gpu = cp.asarray(img, dtype=cp.float32)
 kernel_gpu = cp.asarray(kernel, dtype=cp.float32)
 
@@ -36,5 +36,6 @@ out_gpu = cp.asnumpy(out_gpu).astype(np.uint8)
 # Save results
 cv2.imwrite("output_cpu.jpg", out_cpu)
 cv2.imwrite("output_gpu.jpg", out_gpu)
+
 
 
